@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import handle_request as hr
 
 SPOTIFY_CLIENT_ID = os.getenv('SPOTIFY_CLIENT_ID')
 SPOTIFY_CLIENT_SECRET = os.getenv('SPOTIFY_CLIENT_SECRET')
@@ -15,16 +16,7 @@ print(access_token)
 artist = requests.get('https://api.spotify.com/v1/artists/699OTQXzgjhIYAHMy9RyPD?si=5741889096a64a83', headers={'Authorization': f'Bearer {access_token}'})
 print(artist.content)
 
-def handle_request(url):
-    response = requests.get(url)
+artist = hr.handle_request(url='https://api.spotify.com/v1/artists/699OTQXzgjhIYAHMy9RyPD?si=5741889096a64a83', type='GET', headers={'Authorization': f'Bearer {access_token}'})
+print(artist.content)
 
-    if response.status_code == 200:
-        print("Success, code:", response.status_code)
-    else:
-        raise Exception("Fail, code:", response.status_code)
-
-    print(response.headers["Content-Type"])
-
-    response_dict = response.json()
-
-# handle_request()
+print(hr.handle_request(url='https://api.spotify.com/v1/me',type='GET',headers={'Authorization': f'Bearer {access_token}'}).content())
