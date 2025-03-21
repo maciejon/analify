@@ -1,2 +1,2 @@
-# analify
+# spotiscanner
 Spotify charting and statistics
